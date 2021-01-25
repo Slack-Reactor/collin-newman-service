@@ -8,7 +8,7 @@ module.exports = {
   plugins: [new HtmlWebpackPlugin(), new BundleAnalyzerPlugin()],
   entry: './src',
   output: {
-    filename: 'bundle.js',
+    filename: 'collin.bundle.js',
     path: path.resolve(__dirname, 'public'),
   },
   module: {

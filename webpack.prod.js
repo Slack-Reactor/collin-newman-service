@@ -9,7 +9,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 module.exports = {
   target: 'node',
   mode: 'production',
-  plugins: [new HtmlWebpackPlugin(), new BundleAnalyzerPlugin({analyzerMode: 'server'})],
+  plugins: [new HtmlWebpackPlugin(), new BundleAnalyzerPlugin({ analyzerMode: 'server' })],
   entry: './src',
   output: {
     filename: '[name].js',
