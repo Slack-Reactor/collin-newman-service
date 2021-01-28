@@ -1,11 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   target: 'node',
   mode: 'development',
-  plugins: [new HtmlWebpackPlugin(), new BundleAnalyzerPlugin()],
+  plugins: [new HtmlWebpackPlugin()],
   entry: './src',
   output: {
     filename: 'collin.bundle.js',
