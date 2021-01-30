@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.join(__dirname, 'src/indexTemplate.html'),
@@ -10,7 +11,10 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
   target: 'node',
   mode: 'development',
-  plugins: [HtmlWebpackPluginConfig],
+  plugins: [HtmlWebpackPluginConfig, new CompressionPlugin({
+    algorithm: 'gzip',
+    exclude: /node_modules/,
+  })],
   entry: './src',
   output: {
     filename: 'collin.bundle.js',

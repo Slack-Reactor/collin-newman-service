@@ -22,7 +22,7 @@ class App extends React.Component {
       reviewsTravelerTypeFilter: [],
       reviewsTimeOfYearFilter: [],
       reviewsLanguageFilter: null,
-      reviewsRatingFilter: null,
+      reviewsRatingFilter: [],
     };
     this.helpfulClickHandler = this.helpfulClickHandler.bind(this);
     this.handleClickClearInput = this.handleClickClearInput.bind(this);
@@ -82,7 +82,7 @@ class App extends React.Component {
     // in the future this would get reviews by location
     // but that would require outside assistance from another service
     // to know which location to grab
-    axios.get('http://54.236.56.247:80/api/reviews/')
+    axios.get('http://18.212.23.167:3004/api/reviews/')
       .then((res) => {
         this.setState({ reviews: res.data });
         this.populateRatingsAndPages();
@@ -106,6 +106,7 @@ class App extends React.Component {
       reviewsBodyFilter,
       reviewsLanguageFilter,
       reviewsTravelerTypeFilter,
+      reviewsRatingFilter,
     } = this.state;
     const applyAllFilters = () => {
       const filteredReviews = reviews.filter((review) => {
@@ -136,6 +137,20 @@ class App extends React.Component {
         if (reviewsTravelerTypeFilter.length === 0) {
           return review;
         }
+      }).filter((review) => {
+        let pass = false;
+        for (let i = 0; i < reviewsRatingFilter.length; i += 1) {
+          if (review.starRating === reviewsRatingFilter[i]) {
+            pass = true;
+            break;
+          }
+        }
+        if (pass) {
+          return review;
+        }
+        if (reviewsRatingFilter.length === 0) {
+          return review;
+        }
       });
       return filteredReviews;
     };
@@ -145,7 +160,7 @@ class App extends React.Component {
 
   helpfulClickHandler(e) {
     const id = e.target.getAttribute('data-id');
-    axios.patch(`http://54.236.56.247:80/api/reviews/${id}`)
+    axios.patch(`http://18.212.23.167:3004/api/reviews/${id}`)
       .then(() => {
         this.getData();
       })
@@ -191,7 +206,7 @@ class App extends React.Component {
     review.dateOfExperience = Date.now();
     review.destination = 'Bangkok';
     review.images = [];
-    axios.post('http://54.236.56.247:80/api/reviews', review)
+    axios.post('http://18.212.23.167:3004/api/reviews', review)
       .then((res) => {
         console.log(res);
         this.getData();
