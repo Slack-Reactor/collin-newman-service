@@ -8,7 +8,7 @@
     "test:watch": "jest --watch --verbose",
     "test:coverage": "jest --verbose --coverage --colors",
     "scrape": "node ./dev/unsplashScraper/scrape.js",
-    "seed": "node ./dev/database/seed.js",
+    "seed": "node ./database/seeding/seed.js",
     "start": "nodemon ./server/server.js",
     "react:dev": "webpack --watch",
     "build": "webpack --mode=production",
@@ -46,7 +46,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.2.4",
-    "react-material-ui-carousel": "^2.1.2"
+    "react-material-ui-carousel": "^2.1.2",
+    "wait-port": "^0.2.9"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

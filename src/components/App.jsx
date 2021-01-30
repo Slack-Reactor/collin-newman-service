@@ -82,7 +82,7 @@ class App extends React.Component {
     // in the future this would get reviews by location
     // but that would require outside assistance from another service
     // to know which location to grab
-    axios.get('http://localhost:3004/api/reviews/')
+    axios.get('http://54.236.56.247:80/api/reviews/')
       .then((res) => {
         this.setState({ reviews: res.data });
         this.populateRatingsAndPages();
@@ -145,7 +145,7 @@ class App extends React.Component {
 
   helpfulClickHandler(e) {
     const id = e.target.getAttribute('data-id');
-    axios.patch(`http://localhost:3004/api/reviews/${id}`)
+    axios.patch(`http://54.236.56.247:80/api/reviews/${id}`)
       .then(() => {
         this.getData();
       })
@@ -191,7 +191,7 @@ class App extends React.Component {
     review.dateOfExperience = Date.now();
     review.destination = 'Bangkok';
     review.images = [];
-    axios.post('/api/reviews', review)
+    axios.post('http://54.236.56.247:80/api/reviews', review)
       .then((res) => {
         console.log(res);
         this.getData();

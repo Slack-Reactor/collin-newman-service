@@ -2,11 +2,11 @@ version: "3.8"
 
 services:
   app:
-    container_name: docker-node-mongo
+    container_name: app
     restart: always
     build: .
     ports:
-      - '3004:3004'
+      - '80:3004'
     links:
       - mongo
   mongo:
@@ -14,3 +14,8 @@ services:
     image: mongo
     ports:
       - '27017:27017'
+    volumes:
+      - 'mongoDB:/data/db'
+
+volumes:
+  mongoDB:

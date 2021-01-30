@@ -1,10 +1,13 @@
+/* eslint-disable max-len */
+/* eslint-disable spaced-comment */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Faker = require('faker');
-const Reviews = require('../../database/Reviews.js');
-const db = require('../../database/index');
-const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const mongoose = require('mongoose');
+const Reviews = require('../Reviews.js');
+const db = require('../index');
 const reviewsByLanguage = require('./sampleData.js');
 
 const generateData = () => {
@@ -14,7 +17,7 @@ const generateData = () => {
     .then((fakeUsers) => {
       Reviews.remove((err) => {
         if (err) {
-          console.log(Err);
+          console.log(err);
         } else {
           console.log('Database dropped');
         }
@@ -22,25 +25,24 @@ const generateData = () => {
       const dummyData = [];
       const destinations = ['Phitsanulok', 'Bangkok', 'Phuket', 'Trang', 'Ayutthaya'];
       const languages = ['english', 'italian', 'spanish', 'french', 'russian'];
-      const travelerTypes  = ['families', 'couples', 'solo', 'business', 'friends'];
-      console.log(reviewsByLanguage);
+      const travelerTypes = ['families', 'couples', 'solo', 'business', 'friends'];
       for (let j = 0; j < destinations.length; j++) {
         for (let i = 0; i < 100; i += 1) {
           const randomImages = [];
           for (let k = 0; k < Math.floor(Math.random() * 6); k++) {
-            randomImages.push(`http://d20lp9tw1uk7y6.cloudfront.net/images/tripadvisor_thailand_${Math.floor(Math.random() * 100)}.jpg`)
+            randomImages.push(`http://d20lp9tw1uk7y6.cloudfront.net/images/tripadvisor_thailand_${Math.floor(Math.random() * 100)}.jpg`);
           }
           const randomTravelerTypes = [];
           for (let type = 0; type < Math.floor(Math.random() * (6 - 1) + 1); type++) {
             randomTravelerTypes.push(travelerTypes[type]);
           }
-          let currentLanguage = reviewsByLanguage[languages[j]];
+          const currentLanguage = reviewsByLanguage[languages[j]];
           //google translate is limited to 3900 characters so my foreign language reviews
           //are kind of small so i will add 2 random review bodys together to make a single
           //random review body, i this change will showcase the review filtering better by preventing
           //exact duplicate review bodies
-          let fakeReviewBody = currentLanguage[Math.floor(Math.random() * currentLanguage.length)] + currentLanguage[Math.floor(Math.random() * currentLanguage.length)];
-          dummyReview = {
+          const fakeReviewBody = currentLanguage[Math.floor(Math.random() * currentLanguage.length)] + currentLanguage[Math.floor(Math.random() * currentLanguage.length)];
+          const dummyReview = {
             userName: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
             profilePic: `${fakeUsers.results[Math.floor(Math.random() * 5000)].picture.thumbnail}`,
             created_at: Faker.date.past(),
@@ -56,6 +58,7 @@ const generateData = () => {
             travelerType: randomTravelerTypes,
           };
           dummyData.push(dummyReview);
+          console.log('Dummy Review', dummyReview.userName);
         }
       }
 
