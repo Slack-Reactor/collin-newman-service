@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import Proptypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
@@ -85,8 +86,10 @@ class ReviewFilters extends React.Component {
     };
     this.classes = props.classes;
 
+    // technical debt, im building this on saturday of the last week of fec.
+    // this would have been cleaner otherwise.
     this.handleRatings = function handleRatings(e) {
-      const { ratings } = this.state;
+      const { ratings, handleChangeRatingFilter } = this.state;
       const rating = e.target.getAttribute('data-key');
       const otherRatings = Object.keys(ratings).filter((item) => item !== rating);
       const filteredRatings = {};
@@ -99,8 +102,24 @@ class ReviewFilters extends React.Component {
           [rating]: !ratings[rating],
         },
       });
-      console.log(this.state);
-      // handleChangeRatingFilter();
+      const ratingsToInclude = [];
+      const updatedRatings = this.state.ratings;
+      const ratingKey = {
+        excellent: 5,
+        good: 4,
+        average: 3,
+        poor: 2,
+        terrible: 1,
+      };
+      const keys = Object.keys(updatedRatings);
+      const values = Object.values(updatedRatings);
+      for (let i = 0; i < keys.length; i += 1) {
+        if (values) {
+          ratingsToInclude.push(ratingKey[keys[i]]);
+        }
+      }
+      console.log(ratingsToInclude);
+      handleChangeRatingFilter(ratingsToInclude);
     };
 
     this.handleType = function handleType(e) {

@@ -23,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '100%',
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -59,7 +55,10 @@ const ReviewCard = ({ review, helpfulClickHandler }) => {
     if (images.length === 1) {
       return (
         <CardMedia
-          className={classes.media}
+          style={{
+            height: 0,
+            paddingTop: '56.25%', // 16:9
+          }}
           image={images[0]}
           title="reviews pic"
         />
@@ -69,7 +68,10 @@ const ReviewCard = ({ review, helpfulClickHandler }) => {
       <Carousel>
         {images.map((image) => (
           <CardMedia
-            className={classes.media}
+            style={{
+              height: 0,
+              paddingTop: '56.25%', // 16:9
+            }}
             image={image}
             title="reviews pic"
             key={image}

@@ -356,13 +356,11 @@ let russian = `Далеко-далеко, за словесными горами
 
 Она упаковала семь версалий, вложила инициалы в`;
 
-
 english = english.split('\n').join(' ').split('. ');
 spanish = spanish.split('\n').join(' ').split('. ');
 french = french.split('\n').join(' ').split('. ');
 italian = italian.split('\n').join(' ').split('. ');
 russian = russian.split('\n').join(' ').split('. ');
-
 
 module.exports = {
   english,
@@ -370,4 +368,4 @@ module.exports = {
   french,
   italian,
   russian,
-}
+};

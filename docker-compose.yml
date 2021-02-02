@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    ports:
+      - '80:3004'
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'mongoDB:/data/db'
+
+volumes:
+  mongoDB:
